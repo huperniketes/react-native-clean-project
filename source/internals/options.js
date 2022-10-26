@@ -16,6 +16,7 @@ let wipeSystemiOSPodsCache = true;
 let wipeUseriOSPodsCache = true;
 let wipemacOSBuild = false;
 let wipemacOSPods = false;
+let wipeSystemmacOSPodsCache = true;
 let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
@@ -41,6 +42,9 @@ const getWipemacOSBuild = () => {
 };
 const getWipemacOSPods = () => {
   return wipemacOSPods;
+};
+const getWipeSystemmacOSPodsCache = () => {
+  return wipeSystemmacOSPodsCache;
 };
 const getWipeAndroidBuild = () => {
   return wipeAndroidBuild;
@@ -145,6 +149,21 @@ const askmacOSPods = () =>
     });
   });
 
+const askSystemmacOSPodsCache = () =>
+  new Promise((resolve) => {
+    if (args.includes('--keep-system-macOS-pods-cache')) {
+      wipeSystemmacOSPodsCache = false;
+      return resolve();
+    }
+    return askQuestion('Wipe system macOS Pods cache? (Y/n) ', (answer) => {
+      wipeSystemmacOSPodsCache = checkAnswer(
+        answer,
+        askSystemmacOSPodsCache,
+        resolve
+      );
+    });
+  });
+
 const askAndroidCleanProject = () =>
   new Promise((resolve) => {
     if (args.includes('--clean-android-project')) {
@@ -212,6 +231,7 @@ module.exports = {
   getWipeUseriOSPodsCache,
   getWipemacOSBuild,
   getWipemacOSPods,
+  getWipeSystemmacOSPodsCache,
   getWipeAndroidBuild,
   getWipeNodeModules,
   getUpdateBrew,
@@ -222,6 +242,7 @@ module.exports = {
   askUseriOSPodsCache,
   askmacOS,
   askmacOSPods,
+  askSystemmacOSPodsCache,
   askUpdatePods,
   askAndroid,
   askAndroidCleanProject,

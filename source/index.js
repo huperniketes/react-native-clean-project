@@ -10,6 +10,7 @@ async function main() {
   await options.askUseriOSPodsCache();
   await options.askmacOS();
   await options.askmacOSPods();
+  await options.askSystemmacOSPodsCache();
   await options.askUpdatePods();
   await options.askAndroid();
   await options.askAndroidCleanProject();
@@ -47,6 +48,10 @@ async function main() {
 
   if (options.getWipemacOSPods()) {
     await executeTask(tasks.wipemacOSPodsFolder);
+  }
+
+  if (options.getWipeSystemmacOSPodsCache()) {
+    await executeTask(tasks.wipeSystemmacOSPodsCache);
   }
   if (options.getWipeAndroidBuild()) {
     await executeTask(tasks.wipeAndroidBuildFolder);

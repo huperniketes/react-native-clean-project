@@ -36,6 +36,11 @@ const tasks = {
     command: 'rm',
     args: ['-rf', 'macos/Pods']
   },
+  wipeSystemmacOSPodsCache: {
+    name: 'wipe system macOS Pods cache',
+    command: 'cd macos & pod',
+    args: ['cache', 'clean', '--all']
+  },
   wipeAndroidBuildFolder: {
     name: 'wipe android build folder',
     command: 'rm',
