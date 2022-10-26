@@ -25,6 +25,12 @@ const tasks = {
     command: 'cd ios && pod update',
     args: []
   },
+  wipemacOSBuildFolder: {
+    name: 'wipe macOS build artifacts',
+    command:
+      'rm -rf macos/build && (killall Xcode || true) && xcrun -k && cd macos && xcodebuild -alltargets clean && cd .. && rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache" && rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache" && rm -fr ~/Library/Developer/Xcode/DerivedData/ && rm -fr ~/Library/Caches/com.apple.dt.Xcode/',
+    args: []
+  },
   wipeAndroidBuildFolder: {
     name: 'wipe android build folder',
     command: 'rm',

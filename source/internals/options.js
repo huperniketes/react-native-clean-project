@@ -14,6 +14,7 @@ let wipeiOSBuild = false;
 let wipeiOSPods = false;
 let wipeSystemiOSPodsCache = true;
 let wipeUseriOSPodsCache = true;
+let wipemacOSBuild = false;
 let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
@@ -33,6 +34,9 @@ const getWipeSystemiOSPodsCache = () => {
 };
 const getWipeUseriOSPodsCache = () => {
   return wipeUseriOSPodsCache;
+};
+const getWipemacOSBuild = () => {
+  return wipemacOSBuild;
 };
 const getWipeAndroidBuild = () => {
   return wipeAndroidBuild;
@@ -115,6 +119,17 @@ const askUseriOSPodsCache = () =>
     });
   });
 
+const askmacOS = () =>
+  new Promise((resolve) => {
+    if (args.includes('--remove-macOS-build')) {
+      wipemacOSBuild = true;
+      return resolve();
+    }
+    return askQuestion('Wipe macOS build folder? (Y/n) ', (answer) => {
+      wipemacOSBuild = checkAnswer(answer, askmacOS, resolve);
+    });
+  });
+
 const askAndroidCleanProject = () =>
   new Promise((resolve) => {
     if (args.includes('--clean-android-project')) {
@@ -180,6 +195,7 @@ module.exports = {
   getWipeiOSPods,
   getWipeSystemiOSPodsCache,
   getWipeUseriOSPodsCache,
+  getWipemacOSBuild,
   getWipeAndroidBuild,
   getWipeNodeModules,
   getUpdateBrew,
@@ -188,6 +204,7 @@ module.exports = {
   askiOSPods,
   askSystemiOSPodsCache,
   askUseriOSPodsCache,
+  askmacOS,
   askUpdatePods,
   askAndroid,
   askAndroidCleanProject,
