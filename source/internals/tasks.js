@@ -41,6 +41,11 @@ const tasks = {
     command: 'cd macos & pod',
     args: ['cache', 'clean', '--all']
   },
+  updatemacOSPods: {
+    name: 'update macOS Pods',
+    command: 'cd macos && pod update',
+    args: []
+  },
   wipeAndroidBuildFolder: {
     name: 'wipe android build folder',
     command: 'rm',

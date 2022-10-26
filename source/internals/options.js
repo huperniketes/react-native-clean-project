@@ -21,6 +21,7 @@ let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
 let updatePods = true;
+let updatemacOSPods = true;
 
 const getCleanAndroidProject = () => {
   return cleanAndroidProject;
@@ -57,6 +58,9 @@ const getUpdateBrew = () => {
 };
 const getUpdatePods = () => {
   return updatePods;
+};
+const getUpdatemacOSPods = () => {
+  return updatemacOSPods;
 };
 
 const askQuestion = (question, callback) => {
@@ -223,6 +227,17 @@ const askUpdatePods = () =>
     });
   });
 
+const askUpdatemacOSPods = () =>
+  new Promise((resolve) => {
+    if (args.includes('--keep-macOS-pods')) {
+      updatemacOSPods = false;
+      return resolve();
+    }
+    return askQuestion('Update macOS pods? (Y/n) ', (answer) => {
+      updatemacOSPods = checkAnswer(answer, askUpdatemacOSPods, resolve);
+    });
+  });
+
 module.exports = {
   getCleanAndroidProject,
   getWipeiOSBuild,
@@ -236,6 +251,7 @@ module.exports = {
   getWipeNodeModules,
   getUpdateBrew,
   getUpdatePods,
+  getUpdatemacOSPods,
   askiOS,
   askiOSPods,
   askSystemiOSPodsCache,
@@ -244,6 +260,7 @@ module.exports = {
   askmacOSPods,
   askSystemmacOSPodsCache,
   askUpdatePods,
+  askUpdatemacOSPods,
   askAndroid,
   askAndroidCleanProject,
   askNodeModules,
