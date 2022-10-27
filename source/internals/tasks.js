@@ -38,7 +38,7 @@ const tasks = {
   },
   wipeSystemmacOSPodsCache: {
     name: 'wipe system macOS Pods cache',
-    command: 'cd macos & pod',
+    command: 'cd macos && pod',
     args: ['cache', 'clean', '--all']
   },
   updatemacOSPods: {
